@@ -11,7 +11,7 @@ pipeline {
         AWS_ACCESS_KEY_ID = credentials('AWS_ACCESS_KEY_ID') // Use Jenkins credentials
         AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
         ECS_CLUSTER_NAME = "prerna-demo-project-cluster"
-        ECS_SERVICE_NAME = "prerna-app-demo-svc"
+        ECS_SERVICE_NAME = "my-prerna-app-svc"
         ECS_TASK_DEFINITION_NAME = "prerna-demo-applicaction-td"
         
     }
