@@ -39,13 +39,21 @@ pipeline {
             }
             }
             }
+        stage('deleting previous tasks') {
+         steps{ 
+            script {
+                sh "aws ecs update-service --cluster ${ECS_CLUSTER_NAME} --service ${ECS_SERVICE_NAME} --desired-count 0"
+            }
+            }
+            }
             stage('Deploying to ECS'){
                 steps{
                 script {
+
                     def LATEST_IMAGE_URI = sh(script: "aws ecr describe-images --region ${AWS_DEFAULT_REGION} --repository-name testing --query 'sort_by(imageDetails,& imagePushedAt)[-1].imageTags[0]' --output text", returnStdout: true).trim()
                     sh "echo  ${LATEST_IMAGE_URI} " 
                     
-                    sh "aws ecs update-service --cluster ${ECS_CLUSTER_NAME} --service ${ECS_SERVICE_NAME} --force-new-deployment"
+                    sh "aws ecs update-service --cluster ${ECS_CLUSTER_NAME} --service ${ECS_SERVICE_NAME} --desired-count 1 --force-new-deployment"
                 }
                 }
                 }
