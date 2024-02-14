@@ -42,8 +42,9 @@ pipeline {
         stage('deleting previous tasks') {
          steps{ 
             script {
+                waitUntil{
                 sh "aws ecs update-service --cluster ${ECS_CLUSTER_NAME} --service ${ECS_SERVICE_NAME} --desired-count 0"
-                sh "sleep 1000"
+                }
             }
             }
             }
