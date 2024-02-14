@@ -1,12 +1,3 @@
-properties([
-    parameters([
-        string(
-            defaultValue: 'main', // You can set a default branch name if you like
-            description: 'Please enter the branch name',
-            name: 'branch'
-        )
-    ])
-])
 pipeline {
     agent any 
     environment {
@@ -19,20 +10,12 @@ pipeline {
         AWS_DEFAULT_REGION = 'ap-south-1' // Set your AWS region
         AWS_ACCESS_KEY_ID = credentials('AWS_ACCESS_KEY_ID') // Use Jenkins credentials
         AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
-        ECS_CLUSTER_NAME = "final-showdown"
-        ECS_SERVICE_NAME = "final-showdown-svc"
-        ECS_TASK_DEFINITION_NAME = "final-showdown-td"
+        ECS_CLUSTER_NAME = "prerna-demo-project-cluster"
+        ECS_SERVICE_NAME = "prerna-app-demo-svc"
+        ECS_TASK_DEFINITION_NAME = "prerna-demo-applicaction-td"
         
     }
     stages{
-        stage('Checkout'){
-        steps{
-            script{
-                sh 'echo pulling from branch'
-                git url: 'https://github.com/Unthink-pri18/medium-docker-nodejs.git', branch:"${params.branch}"
-            }
-        }
-    }
         stage('Loging to ECR'){
             steps{
                 script{
