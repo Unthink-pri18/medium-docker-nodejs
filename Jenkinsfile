@@ -44,7 +44,7 @@ pipeline {
             script {
                
                 sh "aws ecs update-service --cluster ${ECS_CLUSTER_NAME} --service ${ECS_SERVICE_NAME} --desired-count 0"
-                sleep(time: 60, unit: 'SECONDS')
+                sleep(time: 20, unit: 'SECONDS')
             }
             }
             }
