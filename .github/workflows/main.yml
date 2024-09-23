@@ -22,3 +22,14 @@ jobs:
 
       - name: Running a Custom Script
         run: echo Hello Priyanshu
+
+# Make sure your script is executable (if it's a Bash script)
+      - name: Make script executable
+        run: chmod +x ./install.sh
+
+      # Run the custom script located at the root of the repository
+      - name: Run custom script
+        run: ./install.sh
+
+      - name: Run docker ps commands
+        run: sudo docker ps
