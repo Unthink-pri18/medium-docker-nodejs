@@ -31,5 +31,15 @@ jobs:
       - name: Run custom script
         run: ./install.sh
 
+      - name: Running docker container
+        run: sudo docker run -dit --name testing-github-actions -p 80:80 nginx 
+        
       - name: Run docker ps commands
         run: sudo docker ps
+
+      - name: Curling the IP of the nginx server
+        run: curl ifconfig.me
+
+      - name: curling  the nginx server
+        run: curl http://localhost:80
+      
